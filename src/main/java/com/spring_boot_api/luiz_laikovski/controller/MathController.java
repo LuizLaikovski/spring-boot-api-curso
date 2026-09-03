@@ -22,14 +22,56 @@ public class MathController {
         return Double.parseDouble(numberReplaced);
     }
 
-    @RequestMapping("/sum/{a}/{b}")
+    @RequestMapping("/sum/{numberOne}/{numberTwo}")
     public Double sum(
-            @PathVariable("a") String a,
-            @PathVariable("b") String b
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
     ) throws Exception {
-        if (!isNumeric(a) || !isNumeric(b)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
-        return convertToDouble(a) + convertToDouble(b);
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
+        return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
 
+    @RequestMapping("/subtract/{numberOne}/{numberTwo}")
+    public Double subtract(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
+        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+    }
 
+    @RequestMapping("/multiplication/{numberOne}/{numberTwo}")
+    public Double multiplication(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
+        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+    }
+
+    @RequestMapping("/division/{numberOne}/{numberTwo}")
+    public Double division(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
+        return convertToDouble(numberOne) / convertToDouble(numberTwo);
+    }
+
+    @RequestMapping("/mean/{numberOne}/{numberTwo}")
+    public Double mean(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
+        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2;
+    }
+
+    @RequestMapping("/squareRoot/{number}")
+    public Double squareRoot(
+            @PathVariable("number") String number
+    ) throws Exception {
+        if (!isNumeric(number)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
+        return Math.sqrt(convertToDouble(number));
+    }
 }
