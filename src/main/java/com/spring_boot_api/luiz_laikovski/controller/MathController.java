@@ -1,26 +1,21 @@
 package com.spring_boot_api.luiz_laikovski.controller;
 
 import com.spring_boot_api.luiz_laikovski.exception.UnsupportedMathOperationException;
+import com.spring_boot_api.luiz_laikovski.service.MathService;
 import com.spring_boot_api.luiz_laikovski.utilitys.ConvertNumber;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.spring_boot_api.luiz_laikovski.utilitys.ConvertNumber.convertToDouble;
+import static com.spring_boot_api.luiz_laikovski.utilitys.ConvertNumber.isNumeric;
+
 
 @RestController
 @RequestMapping("/math")
 public class MathController {
-    private MathController mathController;
 
-    public Boolean isNumeric(String number) {
-        String numberReplaced = ConvertNumber.replaceNumber(number);
-        return numberReplaced.matches("[-+]?[0-9]*\\.?[0-9]+");
-    }
-
-    private Double convertToDouble(String strNumber) {
-        String numberReplaced = ConvertNumber.replaceNumber(strNumber);
-        return Double.parseDouble(numberReplaced);
-    }
+    MathService mathService;
 
     @RequestMapping("/sum/{numberOne}/{numberTwo}")
     public Double sum(
@@ -28,7 +23,7 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ) throws Exception {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
-        return convertToDouble(numberOne) + convertToDouble(numberTwo);
+        return mathService.sum(numberOne, numberTwo);
     }
 
     @RequestMapping("/subtract/{numberOne}/{numberTwo}")
@@ -37,7 +32,7 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ) {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
-        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+        return mathService.subtract(numberOne, numberTwo);
     }
 
     @RequestMapping("/multiplication/{numberOne}/{numberTwo}")
@@ -46,7 +41,7 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ) {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
-        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+        return mathService.multiplication(numberOne, numberTwo);
     }
 
     @RequestMapping("/division/{numberOne}/{numberTwo}")
@@ -55,7 +50,7 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ) {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
-        return convertToDouble(numberOne) / convertToDouble(numberTwo);
+        return mathService.division(numberOne, numberTwo);
     }
 
     @RequestMapping("/mean/{numberOne}/{numberTwo}")
@@ -64,7 +59,7 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ) throws Exception {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
-        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2;
+        return mathService.mean(numberOne, numberTwo);
     }
 
     @RequestMapping("/squareRoot/{number}")
@@ -72,6 +67,6 @@ public class MathController {
             @PathVariable("number") String number
     ) throws Exception {
         if (!isNumeric(number)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
-        return Math.sqrt(convertToDouble(number));
+        return mathService.squareRoot(number);
     }
 }

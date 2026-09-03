@@ -16,4 +16,14 @@ public class ConvertNumber {
         if (strNumber == null || strNumber.isEmpty()) throw new UnsupportedMathOperationException("Insira um valor numerico");
         return strNumber.replace(',', '.');
     }
+
+    public static Double convertToDouble(String strNumber) {
+        String numberReplaced = ConvertNumber.replaceNumber(strNumber);
+        return Double.parseDouble(numberReplaced);
+    }
+
+    public static Boolean isNumeric(String number) {
+        String numberReplaced = ConvertNumber.replaceNumber(number);
+        return numberReplaced.matches("[-+]?[0-9]*\\.?[0-9]+");
+    }
 }
