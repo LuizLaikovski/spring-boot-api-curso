@@ -35,4 +35,6 @@ public class CustomizedEntityResponseHandler extends ResponseEntityExceptionHand
         );
         return  new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     };
+
+
 }

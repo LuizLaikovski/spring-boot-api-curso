@@ -1,1 +1,15 @@
-spring.application.name=luiz-laikovski
+spring:
+  application:
+    name: luiz-laikovski
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/curso-java-spring-boot?useTimeZone=true&serverTimeZone=UTC
+    username: postgres
+    password: 16012008
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: false
