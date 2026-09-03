@@ -2,12 +2,9 @@ package com.spring_boot_api.luiz_laikovski.controller;
 
 import com.spring_boot_api.luiz_laikovski.exception.UnsupportedMathOperationException;
 import com.spring_boot_api.luiz_laikovski.service.MathService;
-import com.spring_boot_api.luiz_laikovski.utilitys.ConvertNumber;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static com.spring_boot_api.luiz_laikovski.utilitys.ConvertNumber.convertToDouble;
 import static com.spring_boot_api.luiz_laikovski.utilitys.ConvertNumber.isNumeric;
 
 
@@ -67,6 +64,7 @@ public class MathController {
             @PathVariable("number") String number
     ) throws Exception {
         if (!isNumeric(number)) throw  new UnsupportedMathOperationException("Insira um valor numerico");
+        System.out.println(squareRoot(number));
         return mathService.squareRoot(number);
     }
 }
